@@ -18,7 +18,7 @@ class ReceivingEngine(object):
 		self.dataEngine = dataEngine
 		self.i = 0 
 
-		self.connection = pika.BlockingConnection(pika.ConnectionParameters(self.ip, heartbeat_interval=20))
+		self.connection = pika.BlockingConnection(pika.ConnectionParameters(self.ip, heartbeat=20))
 		self.channel = self.connection.channel()
 		self.channel.basic_qos(prefetch_count=1)
 
