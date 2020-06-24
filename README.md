@@ -1,9 +1,7 @@
 # Overview
-*sysinfo* is an application designed to real-time system information to another computer over the network and display it on another system. It is a Python application with a GUI. The project was made for a practical interview and tries to employ many programming techniques: multi-threading, networking, interface design, unit testing.
+*sysinfo* is an application designed to real-time system information to another computer over the network and display it on another system. It composed of two Python 2.7 applications with GUI. The project was made for a practical interview and tries to employ many programming techniques: multi-threading, networking, interface design, unit testing.
 
-It composed of two Python applications (made in Python v2.7). 
-
-The first one, named **sysinfo**, accesses the WMI interface from Microsoft Windows operating systems to display information (Computer Manufacturer, OS Version, etc.) and statistics (CPU, memory, etc.). It is also designed to send the collected information to an AMQP server over the network.
+The first Python application, named **sysinfo**, accesses the WMI interface from Microsoft Windows operating systems to display information (Computer Manufacturer, OS Version, etc.) and statistics (CPU, memory, etc.). It is also designed to send the collected information to an AMQP server over the network.
 
 The second application, named **sysinfoc** (c from collector), was made to connect to the local AMQP server and display the information gathered, saving all this information to an SQLite database.
 
