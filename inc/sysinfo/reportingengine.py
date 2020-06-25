@@ -53,11 +53,11 @@ class ReportingEngine(object):
 
 		# connect
 		self.credentials = pika.PlainCredentials("sysinfo", "sysinfo")
-		self.connection = pika.BlockingConnection(pika.ConnectionParameters(credentials=self.credentials, host=self.ip, heartbeat_interval=20))
+		self.connection = pika.BlockingConnection(pika.ConnectionParameters(credentials=self.credentials, host=self.ip, heartbeat=20))
 		self.channel = self.connection.channel()
-		self.channel.basic_qos(prefetch_size=0, prefetch_count=1, all_channels=True)
+		self.channel.basic_qos(prefetch_size=0, prefetch_count=1, global_qos=True)
 
-		self.channel.exchange_declare(exchange='sysinfo_exchg', type='direct')
+		self.channel.exchange_declare(exchange='sysinfo_exchg', exchange_type='direct')
 		#self.channel.queue_declare(queue="sysinfo_stats")
 		#self.channel.queue_declare(queue="sysinfo_info")
 		self.channel.queue_declare(queue=self.mac+"_req")
@@ -74,17 +74,16 @@ class ReportingEngine(object):
 
 		#self.channel.basic_consume(self.consumeStats, queue='sysinfo_stats')
 		#self.channel.basic_consume(self.consumeInfo, queue='sysinfo_info')
-		self.channel.basic_consume(self.handleRequests,
-								   queue=self.mac+"_req")
+		self.channel.basic_consume(self.mac+"_req", self.handleRequests)
 		
 		#self.sendInfo()
 
 		thread.start_new_thread(self.channel.start_consuming, ())
 
-		self.connection_stats = pika.BlockingConnection(pika.ConnectionParameters(credentials=self.credentials, host=self.ip, heartbeat_interval=20))
+		self.connection_stats = pika.BlockingConnection(pika.ConnectionParameters(credentials=self.credentials, host=self.ip, heartbeat=20))
 		self.channel_stats = self.connection_stats.channel()
 		#self.channel_stats.basic_qos(prefetch_count=1)
-		self.channel_stats.exchange_declare(exchange='sysinfo_exchg', type='direct')
+		self.channel_stats.exchange_declare(exchange='sysinfo_exchg', exchange_type='direct')
 
 		thread.start_new_thread(self.packageAndSendStats, ())
 
@@ -121,6 +120,7 @@ class ReportingEngine(object):
 		statsReport = self.statsEngine.toReport
 		self.statsEngine.updateEvent.clear()
 		for i in range(len(statsReport)):
+			statsReport[i] = unicode(statsReport[i])
 			statsReport[i] = statsReport[i].encode('ascii')
 			statsReport[i] = self.mac + " : " + statsReport[i]
 		infoMessage.extend(statsReport)

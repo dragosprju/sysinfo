@@ -22,7 +22,7 @@ class ReceivingEngine(object):
 		self.channel = self.connection.channel()
 		self.channel.basic_qos(prefetch_count=1)
 
-		self.channel.exchange_declare(exchange='sysinfo_exchg', type='direct')
+		self.channel.exchange_declare(exchange='sysinfo_exchg')
 		self.channel.queue_declare(queue="sysinfo_stats")
 		self.channel.queue_declare(queue="sysinfo_info")
 		#self.channel.queue_declare(queue=self.mac+"_req")
@@ -37,8 +37,8 @@ class ReceivingEngine(object):
 		#						queue=self.mac+"_req",
 		#						routing_key='req')
 
-		self.channel.basic_consume(self.consumeStats, queue='sysinfo_stats')
-		self.channel.basic_consume(self.consumeInfo, queue='sysinfo_info')
+		self.channel.basic_consume('sysinfo_stats', self.consumeStats)
+		self.channel.basic_consume('sysinfo_info', self.consumeInfo)
 		#self.channel.basic_consume(self.checkRequests,
 		#						   queue=self.mac+"_req")		
 

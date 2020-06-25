@@ -424,6 +424,9 @@ class DatabaseEngine():
 
 		# Computer name
 		#computerQuery = self.session.query(Computer.id, Computer.name).all()
+		if len(computerQuery) == 0:
+			return []
+		
 		if type(computerQuery[0]) is Computer:
 			print "Average got computer type"
 			return []
