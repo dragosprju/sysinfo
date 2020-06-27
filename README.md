@@ -96,7 +96,7 @@ The applications have been tested on:
 # Room for improvement
 
 Other possible improvements are:
-- UI: Change Tkinter to another GUI library since *sysinfoc* needs better handling of constant updating of labels
+- UI: Possibly change Tkinter to another GUI library since *sysinfoc* needs better handling of constant updating of labels
 - General: Packaging of the application for installation
 - General: Horizontal auto scrollbar
 - General: Handle closing of the applications (close connections, stop threads, delete queues)
