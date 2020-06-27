@@ -1,5 +1,5 @@
 # Overview
-*sysinfo* is an application designed to real-time system information to another computer over the network and display it on another system. It composed of two Python 2.7 applications with GUI. The project was made for a practical interview and tries to employ many programming techniques: multi-threading, networking, interface design, unit testing.
+*sysinfo* is an application designed to real-time system information to another computer over the network and display it on another system. It composed of two Python 2.7 applications with GUI. The project was made for a practical interview and employs many programming techniques: multi-threading, networking, interface design, unit testing.
 
 ![Sysinfo](screenshots/Capture2.PNG)
 ![Sysinfoc](screenshots/Capture.PNG)
@@ -95,9 +95,8 @@ The applications have been tested on:
 
 # Room for improvement
 
-**IMPORTANT**: Unfortunately, the project currently suffers from a **python-crashing bug** in the *sysinfoc* application. My suspcion is that it happens because of the Tcl/Tk GUI library creating errors of a pointer nature, because it can't handle constant updating of the labels. Therefore, the project is waiting for a deeper investigation of the problem and if no solution is found, to be adapted to a new GUI framework.
-
 Other possible improvements are:
+- UI: Change Tkinter to another GUI library since *sysinfoc* needs better handling of constant updating of labels
 - General: Packaging of the application for installation
 - General: Horizontal auto scrollbar
 - General: Handle closing of the applications (close connections, stop threads, delete queues)
