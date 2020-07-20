@@ -1,5 +1,5 @@
 # Overview
-*sysinfo* is an application designed to real-time system information to another computer over the network and display it on another system. It composed of two Python 2.7 applications with GUI. The project was made for a practical interview and employs many programming techniques: multi-threading, networking, interface design, unit testing.
+*sysinfo* is an application designed to real-time system information to another computer over the network and display it on another system. It composed of two Python 2.7 applications with GUI. The project was fun to develop for my own self-development and employs many programming techniques: multi-threading, networking, interface design, unit testing.
 
 ![Sysinfo](screenshots/Capture2.PNG)
 ![Sysinfoc](screenshots/Capture.PNG)
